@@ -1,4 +1,4 @@
-module "rds-sg" {
+module "rds_sg" {
   source      = "terraform-aws-modules/security-group/aws"
   name        = "${var.project_name}-rds-sg"
   description = "Security group for RDS database"

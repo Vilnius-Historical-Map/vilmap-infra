@@ -22,5 +22,6 @@ module "rds" {
   subnet_ids             = module.vpc.private_subnets
   deletion_protection    = true
 
+  vpc_security_group_ids = [module.rds_sg.security_group_id]
   tags = var.tags
 }
