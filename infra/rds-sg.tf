@@ -1,13 +1,13 @@
 module "rds-sg" {
   source      = "terraform-aws-modules/security-group/aws"
-  name        = "${project-name}-rds-sg"
+  name        = "${var.project_name}-rds-sg"
   description = "Security group for RDS database"
   vpc_id      = module.vpc.vpc_id
 
   ingress_with_source_security_group_id = [
     {
-      from_port                = 5432
-      to_port                  = 5432
+      from_port                = var.rds_port
+      to_port                  = var.rds_port
       protocol                 = "tcp"
       source_security_group_id = module.bastion-sg.security_group_id
     }
