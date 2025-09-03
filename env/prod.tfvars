@@ -3,6 +3,7 @@ project_name = "vilmap"
 tags = {
   Terraform   = "true"
   Environment = "prod"
+  PeojectName = "Vilmap"
 }
 
 region = "eu-north-1"
