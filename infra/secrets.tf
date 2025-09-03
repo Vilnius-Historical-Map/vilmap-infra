@@ -1,9 +1,9 @@
 data "aws_ssm_parameter" "db_username" {
-  name            = "vilmap/prod/db-username"
+  name            = "${var.project_name}/prod/db-username"
   with_decryption = true
 }
 
 data "aws_ssm_parameter" "db_password" {
-  name            = "vilmap/prod/db-name"
+  name            = "${var.project_name}/prod/db-password"
   with_decryption = true
 }
