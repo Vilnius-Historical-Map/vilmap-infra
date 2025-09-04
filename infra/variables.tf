@@ -86,3 +86,6 @@ variable "bastion_instance_type" {
   type    = string
   default = "t3.micro"
 }
+
+variable "subdomain" {}
+variable "domain" {}
