@@ -41,6 +41,11 @@ variable "rds_identifier" {
   default = "vilmapdb"
 }
 
+variable "engine_name" {
+  type    = string
+  default = "postgres"
+}
+
 variable "rds_engine_version" {
   type    = string
   default = "17"
