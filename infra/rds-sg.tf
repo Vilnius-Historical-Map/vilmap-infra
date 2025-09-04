@@ -10,6 +10,12 @@ module "rds_sg" {
       to_port                  = var.rds_port
       protocol                 = "tcp"
       source_security_group_id = module.bastion_sg.security_group_id
+    },
+    {
+      from_port                = var.rds_port
+      to_port                  = var.rds_port
+      protocol                 = "tcp"
+      source_security_group_id = module.lambda_sg.security_group_id
     }
   ]
   egress_with_cidr_blocks = [
