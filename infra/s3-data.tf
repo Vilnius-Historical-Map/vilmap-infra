@@ -1,17 +1,10 @@
-module "frontend_s3_bucket" {
+module "data_s3_bucket" {
   source = "terraform-aws-modules/s3-bucket/aws"
-
-  bucket = "${var.project_name}-frontend"
-
-  website = {
-    index_document = "index.html"
-    #     error_document = "error.html"
-  }
+  bucket = "${var.project_name}-data"
 
   versioning = {
     enabled = true
   }
-
   control_object_ownership = true
   object_ownership         = "BucketOwnerEnforced"
 
