@@ -9,7 +9,7 @@ module "rds_sg" {
       from_port                = var.rds_port
       to_port                  = var.rds_port
       protocol                 = "tcp"
-      source_security_group_id = module.bastion-sg.security_group_id
+      source_security_group_id = module.bastion_sg.security_group_id
     }
   ]
   egress_with_cidr_blocks = [
