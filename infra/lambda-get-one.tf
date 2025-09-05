@@ -1,25 +1,25 @@
 module "lambda_get_one" {
   source        = "terraform-aws-modules/lambda/aws"
-  function_name = "lambda-get-all-events"
+  function_name = "${var.project_name}-lambda-get-one"
 
-  runtime      = "python3.12"
-  handler      = "index.handler"
+  runtime      = var.lambda_runtime
+  handler      = var.lambda_handler
   package_type = "Zip"
 
-  s3_bucket = module.lambda_s3_bucket.s3_bucket_id
-  s3_key = "lambda-get-one/latest.zip"
+  create_package = false
+  s3_existing_package = {
+    bucket = module.lambda_s3_bucket.s3_bucket_id
+    key    = var.lambda_get_one_key
+  }
 
-  timeout        = 10
+  timeout        = var.lambda_timeout
   vpc_subnet_ids = module.vpc.public_subnets
   vpc_security_group_ids = [module.lambda_sg.security_group_id]
 
-  environment_variables = {
-  }
-
   assume_role_policy_statements = {
     account_root = {
-      effect = "Allow",
-      actions = ["sts:AssumeRole"],
+      effect = "Allow"
+      actions = ["sts:AssumeRole"]
       principals = {
         service = {
           type = "Service"
@@ -28,6 +28,7 @@ module "lambda_get_one" {
       }
     }
   }
+
   attach_policy_statements = true
   policy_statements = {
     vpc_access = {
@@ -40,5 +41,6 @@ module "lambda_get_one" {
       resources = ["*"]
     }
   }
+
   tags = var.tags
 }
