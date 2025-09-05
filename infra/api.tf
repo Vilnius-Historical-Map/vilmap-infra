@@ -9,8 +9,8 @@ module "http_api" {
     allow_origins = ["https://${var.subdomain}${var.domain}"]
   }
 
-  create_domain_name    = false
-  create_domain_records = false
+  domain_name      = "${var.api_subdomain}.${var.domain}"
+  hosted_zone_name = var.domain
 
   stage_access_log_settings = {
     create_log_group            = true
