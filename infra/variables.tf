@@ -88,4 +88,41 @@ variable "bastion_instance_type" {
 }
 
 variable "subdomain" {}
-variable "domain" {}
+
+# Lambda
+variable "lambda_runtime" {
+  type    = string
+  default = "python3.12"
+}
+
+variable "lambda_handler" {
+  type    = string
+  default = "index.handler"
+}
+
+variable "lambda_timeout" {
+  type    = number
+  default = 10
+}
+
+variable "lambda_get_one_key" {
+  type        = string
+  default     = "lambda-get-one/latest.zip"
+  description = "S3 key for get-one Lambda zip"
+}
+
+variable "lambda_get_all_key" {
+  type        = string
+  default     = "lambda-get-all/latest.zip"
+  description = "S3 key for get-all Lambda zip"
+}
+
+# API Gateway
+variable "api_subdomain" {
+  type    = string
+  default = "api"
+}
+
+variable "domain" {
+  type = string
+}

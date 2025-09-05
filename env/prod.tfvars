@@ -10,6 +10,7 @@ region = "eu-north-1"
 
 domain   = "vilmap.click"
 subdomain = ""
+
 # VPC
 vpc_cidr = "10.0.0.0/16"
 azs = ["eu-north-1a", "eu-north-1b"]
@@ -29,3 +30,9 @@ rds_monitoring_role_name = "VilmapRDSMonitoringRole"
 
 # Bastion
 bastion_instance_type = "t3.micro"
+
+# Lambda
+lambda_bucket       = "vilmap-lambda-artifacts"
+lambda_get_one_key  = "lambda-get-one/latest.zip"
+lambda_get_all_key  = "lambda-get-all/latest.zip"
+
