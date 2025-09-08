@@ -126,3 +126,11 @@ variable "api_subdomain" {
 variable "domain" {
   type = string
 }
+
+variable "zone_name" {
+  type = string
+}
+
+variable "zone_id" {
+  type = string
+}

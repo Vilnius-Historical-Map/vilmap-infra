@@ -8,8 +8,10 @@ tags = {
 
 region = "eu-north-1"
 
-domain   = "vilmap.click"
+domain    = "vilmap.click"
 subdomain = ""
+zone_id   = "Z07484993CJEBX0BD8VOJ"
+zone_name = "vilmap.click"
 
 # VPC
 vpc_cidr = "10.0.0.0/16"
@@ -32,7 +34,5 @@ rds_monitoring_role_name = "VilmapRDSMonitoringRole"
 bastion_instance_type = "t3.micro"
 
 # Lambda
-lambda_bucket       = "vilmap-lambda-artifacts"
-lambda_get_one_key  = "lambda-get-one/latest.zip"
-lambda_get_all_key  = "lambda-get-all/latest.zip"
-
+lambda_get_one_key = "lambda-get-one/latest.zip"
+lambda_get_all_key = "lambda-get-all/latest.zip"
