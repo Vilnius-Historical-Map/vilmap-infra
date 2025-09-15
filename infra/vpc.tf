@@ -6,6 +6,7 @@ module "vpc" {
   azs             = var.azs
   private_subnets = var.private_subnets
   public_subnets  = var.public_subnets
+  intra_subnets = var.intra_subnets
 
   enable_nat_gateway = false
   enable_vpn_gateway = false
