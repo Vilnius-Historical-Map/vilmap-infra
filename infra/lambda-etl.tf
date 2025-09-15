@@ -1,10 +1,9 @@
 module "lambda_etl" {
   source        = "terraform-aws-modules/lambda/aws"
   function_name = "${var.project_name}-lambda-etl"
-
-  runtime      = var.lambda_runtime
-  handler      = var.lambda_handler
-  package_type = "Zip"
+  runtime       = var.lambda_runtime
+  handler       = var.lambda_handler
+  package_type  = "Zip"
 
   create_package = false
   s3_existing_package = {
@@ -12,9 +11,13 @@ module "lambda_etl" {
     key    = var.lambda_etl_key
   }
   environment_variables = {
-    DB_HOST = module.rds.db_instance_address
-    DB_PORT = module.rds.db_instance_port
+    DB_HOST     = module.rds.db_instance_address
+    DB_PORT     = module.rds.db_instance_port
     DB_NAME = module.rds.db_instance_name
+#     Interface VPC Endpoints are NOT free, so direct envs were used
+    DB_PASSWORD = data.aws_ssm_parameter.db_password.value
+    DB_USERNAME = data.aws_ssm_parameter.db_username.value
+    S3_BUCKET   = module.data_s3_bucket.s3_bucket_id
   }
 
   timeout        = var.lambda_timeout
@@ -55,17 +58,6 @@ module "lambda_etl" {
       resources = [
         module.data_s3_bucket.s3_bucket_arn,
         "${module.data_s3_bucket.s3_bucket_arn}/*"
-      ]
-    }
-    ssm_read = {
-      effect = "Allow"
-      actions = [
-        "ssm:GetParameter",
-        "ssm:GetParameters"
-      ]
-      resources = [
-        "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/vilmap/prod/db-password",
-        "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/vilmap/prod/db-user"
       ]
     }
   }
