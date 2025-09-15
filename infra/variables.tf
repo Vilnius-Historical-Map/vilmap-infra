@@ -35,6 +35,11 @@ variable "public_subnets" {
   default = ["10.0.101.0/24", "10.0.102.0/24"]
 }
 
+variable "intra_subnets" {
+  type = list(string)
+  default = ["10.0.51.0/24", "10.0.52.0/24"]
+}
+
 # RDS
 variable "rds_identifier" {
   type    = string
@@ -117,6 +122,11 @@ variable "lambda_get_all_key" {
   description = "S3 key for get-all Lambda zip"
 }
 
+variable "lambda_etl_key" {
+  type        = string
+  default     = "lambda-etl/latest.zip"
+  description = "S3 key for elt Lambda zip"
+}
 # API Gateway
 variable "api_subdomain" {
   type    = string

@@ -36,3 +36,4 @@ bastion_instance_type = "t3.micro"
 # Lambda
 lambda_get_one_key = "lambda-get-one/latest.zip"
 lambda_get_all_key = "lambda-get-all/latest.zip"
+lambda_etl_key     = "lambda-etl/latest.zip"
