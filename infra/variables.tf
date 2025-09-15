@@ -107,7 +107,7 @@ variable "lambda_handler" {
 
 variable "lambda_timeout" {
   type    = number
-  default = 10
+  default = 120
 }
 
 variable "lambda_get_one_key" {
