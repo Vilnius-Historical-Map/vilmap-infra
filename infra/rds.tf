@@ -2,8 +2,9 @@ module "rds" {
   source     = "terraform-aws-modules/rds/aws"
   identifier = var.rds_identifier
 
-  major_engine_version                = var.rds_engine_version
-  auto_minor_version_upgrade          = true
+  major_engine_version = var.rds_engine_version
+  #   engine_version                      = "17.2"
+  auto_minor_version_upgrade          = false
   engine                              = var.engine_name
   instance_class                      = var.rds_instance_class
   allocated_storage                   = var.rds_allocated_storage
@@ -16,8 +17,11 @@ module "rds" {
   username                    = data.aws_ssm_parameter.db_username.value
   db_name                     = var.rds_db_name
 
-  monitoring_role_name   = var.rds_monitoring_role_name
-  create_monitoring_role = true
+  monitoring_role_name        = var.rds_monitoring_role_name
+  create_monitoring_role      = true
+  create_cloudwatch_log_group = true
+  cloudwatch_log_group_class  = "STANDARD"
+  enabled_cloudwatch_logs_exports = ["postgresql"]
 
   create_db_subnet_group = true
   subnet_ids             = module.vpc.private_subnets
