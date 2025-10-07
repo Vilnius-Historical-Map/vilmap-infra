@@ -14,7 +14,7 @@ module "lambda_etl" {
     DB_HOST     = module.rds.db_instance_address
     DB_PORT     = module.rds.db_instance_port
     DB_NAME = module.rds.db_instance_name
-#     Interface VPC Endpoints are NOT free, so direct envs were used
+    #     Interface VPC Endpoints are NOT free, so direct envs were used
     DB_PASSWORD = data.aws_ssm_parameter.db_password.value
     DB_USERNAME = data.aws_ssm_parameter.db_username.value
     S3_BUCKET   = module.data_s3_bucket.s3_bucket_id
@@ -23,6 +23,12 @@ module "lambda_etl" {
   timeout        = var.lambda_timeout
   vpc_subnet_ids = module.vpc.intra_subnets
   vpc_security_group_ids = [module.lambda_sg.security_group_id]
+
+  layers = [
+    "arn:aws:lambda:eu-north-1:770693421928:layer:Klayers-p312-SQLAlchemy:6",
+    "arn:aws:lambda:eu-north-1:770693421928:layer:Klayers-p312-psycopg2-binary:1",
+    "arn:aws:lambda:eu-north-1:770693421928:layer:Klayers-p312-pandas:17"
+  ]
 
   assume_role_policy_statements = {
     account_root = {
