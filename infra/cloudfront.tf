@@ -27,6 +27,15 @@ module "cloudfront" {
   }
 
   default_root_object = "index.html"
+  # custom_error_response = [{
+  #   error_code         = 404
+  #   response_code      = 404
+  #   response_page_path = "/errors/404.html"
+  # }, {
+  #   error_code         = 403
+  #   response_code      = 403
+  #   response_page_path = "/errors/403.html"
+  # }]
   default_cache_behavior = {
     target_origin_id       = "s3_oac"
     viewer_protocol_policy = "redirect-to-https"
