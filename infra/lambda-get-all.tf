@@ -12,17 +12,21 @@ module "lambda_get_all" {
     key    = var.lambda_get_all_key
   }
 
-  timeout        = var.lambda_timeout
-  vpc_subnet_ids = module.vpc.public_subnets
+  timeout                = var.lambda_timeout
+  vpc_subnet_ids         = module.vpc.public_subnets
   vpc_security_group_ids = [module.lambda_sg.security_group_id]
+  layers = [
+    "arn:aws:lambda:eu-north-1:770693421928:layer:Klayers-p312-SQLAlchemy:6",
+    "arn:aws:lambda:eu-north-1:770693421928:layer:Klayers-p312-psycopg2-binary:1",
+  ]
 
   assume_role_policy_statements = {
     account_root = {
-      effect = "Allow"
+      effect  = "Allow"
       actions = ["sts:AssumeRole"]
       principals = {
         service = {
-          type = "Service"
+          type        = "Service"
           identifiers = ["lambda.amazonaws.com"]
         }
       }
