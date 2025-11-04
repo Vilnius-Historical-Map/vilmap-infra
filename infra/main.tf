@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "vilmap-backend-2025"
+    bucket = "vilmap-backend"
     use_lockfile = true
     key    = "infra/state"
     region = "eu-north-1"
