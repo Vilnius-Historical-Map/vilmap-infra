@@ -9,8 +9,8 @@ tags = {
 region = "eu-north-1"
 
 domain    = "vilmap.click"
-subdomain = ""
-zone_id   = "Z07484993CJEBX0BD8VOJ"
+subdomain = "app"
+zone_id   = "Z03698001BQGA3VNX26HS"
 zone_name = "vilmap.click"
 
 # VPC
