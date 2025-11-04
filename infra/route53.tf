@@ -1,9 +1,10 @@
-module "route53_records" {
-  source    = "terraform-aws-modules/route53/aws//modules/records"
-  zone_name = var.zone_name
+module "route53" {
+  source      = "terraform-aws-modules/route53/aws"
+  name        = var.zone_name
+  create_zone = false
 
-  records = [
-    {
+  records = {
+    "app_record" = {
       name = var.subdomain
       type = "A"
       alias = {
@@ -11,5 +12,5 @@ module "route53_records" {
         zone_id = "Z2FDTNDATAQYW2"
       }
     }
-  ]
+  }
 }
