@@ -1,7 +1,7 @@
 module "cloudfront" {
   source = "terraform-aws-modules/cloudfront/aws"
 
-  aliases = ["${var.subdomain}${var.domain}"]
+  aliases = ["${var.subdomain}.${var.domain}"]
   enabled             = true
   is_ipv6_enabled     = false
   price_class         = "PriceClass_All"
