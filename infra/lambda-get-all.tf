@@ -11,6 +11,13 @@ module "lambda_get_all" {
     bucket = module.lambda_s3_bucket.s3_bucket_id
     key    = var.lambda_get_all_key
   }
+  environment_variables = {
+    DB_HOST     = module.rds.db_instance_address
+    DB_PORT     = module.rds.db_instance_port
+    DB_NAME     = module.rds.db_instance_name
+    DB_PASSWORD = data.aws_ssm_parameter.db_password.value
+    DB_USERNAME = data.aws_ssm_parameter.db_username.value
+  }
 
   timeout                = var.lambda_timeout
   vpc_subnet_ids         = module.vpc.public_subnets
