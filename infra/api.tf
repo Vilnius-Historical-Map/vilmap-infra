@@ -25,14 +25,6 @@ module "http_api" {
   }
 
   routes = {
-    "GET /event/{id}" = {
-      integration = {
-        uri                    = module.lambda_get_one.lambda_function_arn
-        payload_format_version = "2.0"
-        timeout_milliseconds   = 30000
-      }
-    }
-
     "GET /events" = {
       integration = {
         uri                    = module.lambda_get_all.lambda_function_arn
@@ -43,14 +35,6 @@ module "http_api" {
   }
 
   tags = var.tags
-}
-
-resource "aws_lambda_permission" "allow_invoke_get_one" {
-  statement_id  = "AllowExecutionFromAPIGatewayGetOne"
-  action        = "lambda:InvokeFunction"
-  function_name = module.lambda_get_one.lambda_function_name
-  principal     = "apigateway.amazonaws.com"
-  source_arn    = "${module.http_api.api_execution_arn}/*/*"
 }
 
 resource "aws_lambda_permission" "allow_invoke_get_all" {
