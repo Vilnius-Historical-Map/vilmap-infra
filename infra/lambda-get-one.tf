@@ -1,4 +1,6 @@
 module "lambda_get_one" {
+  create = false
+
   source        = "terraform-aws-modules/lambda/aws"
   function_name = "${var.project_name}-lambda-get-one"
 
