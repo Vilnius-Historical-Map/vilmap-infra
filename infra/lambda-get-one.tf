@@ -1,5 +1,5 @@
 module "lambda_get_one" {
-  create = false
+  create = true
 
   source        = "terraform-aws-modules/lambda/aws"
   function_name = "${var.project_name}-lambda-get-one"
@@ -14,9 +14,22 @@ module "lambda_get_one" {
     key    = var.lambda_get_one_key
   }
 
+  environment_variables = {
+    DB_HOST     = module.rds.db_instance_address
+    DB_PORT     = module.rds.db_instance_port
+    DB_NAME     = module.rds.db_instance_name
+    DB_PASSWORD = data.aws_ssm_parameter.db_password.value
+    DB_USERNAME = data.aws_ssm_parameter.db_username.value
+  }
+
   timeout                = var.lambda_timeout
   vpc_subnet_ids         = module.vpc.public_subnets
   vpc_security_group_ids = [module.lambda_sg.security_group_id]
+  layers = [
+    "arn:aws:lambda:eu-north-1:770693421928:layer:Klayers-p312-SQLAlchemy:6",
+    "arn:aws:lambda:eu-north-1:770693421928:layer:Klayers-p312-psycopg2-binary:1",
+  ]
+
 
   assume_role_policy_statements = {
     account_root = {
